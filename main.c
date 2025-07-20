@@ -66,20 +66,25 @@ void submeniu_meci_nou(int n) {
             printf("\t%s\n", options[i]);
             if (i == 0) // primul jucator
             {
+
                 scanf("%s", n1);
                 strcpy(games[nr_jucate].name1,n1);
             }
             else if (i == 1) { // scor primul jucator
+                getchar();
                 scanf("%s", s1);
                 games[nr_jucate].score1 = atoi(s1);
             }
             else if (i == 2) // al doilea jucator
             {
+                getchar();
                 scanf("%s", n2);
                 strcpy(games[nr_jucate].name2,n2);
             }
             else if (i == 3) {
+                getchar();
                 scanf("%s", s2); // scor al doilea jucator
+
                 games[nr_jucate].score2 = atoi(s2);
             }
             if (i == 1) {
@@ -109,6 +114,11 @@ void submeniu_meci_nou(int n) {
                         _sleep(2000);
                         return;
                     }
+                else if ((games[nr_jucate].score1 < 21 && games[nr_jucate].score2 < 21) || (games[nr_jucate].score1 > 21 && games[nr_jucate].score2 < 21) || (games[nr_jucate].score1 > 21 && games[nr_jucate].score2 > 21 && games[nr_jucate].score1 - games[nr_jucate].score2 <2)) {
+                    printf("Meciul se termina la 21 de puncte sau cand cineva are avantaj de 2 puncte");
+                    _sleep(2000);
+                    return;
+                }
             }
             }
     int ok = 0;
@@ -152,9 +162,14 @@ void submeniu_meci_nou(int n) {
                 }
             }
         }
-        printf("Adaugat cu succes");
+        // printf("Adaugat cu succes");
         nr_jucate++;
         file_uptade(n);
+        // printf("\t------Adaugat cu succes!");
+        // _sleep(3000);
+        printf("\t------Adaugat cu succes! Apasa enter pentru a te intoarce la meniul principal------");
+        getchar();
+        getchar();
     }
     else if (ok == 1) {
         printf("Unul din numele introduse nu s-a regasit in lista cu participanti");
